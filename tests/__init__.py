@@ -1,1 +1,0 @@
-"""Tests written in pytest."""

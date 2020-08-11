@@ -56,9 +56,9 @@ def separate_address(address: str) -> ParsedAddress:
 
     Example:
         >>> separate_address('北海道札幌市中央区北1条西2丁目')
-        parsed_address(prefecture='北海道', city='')
+        ParsedAddress(prefecture='北海道', city='')
         >>> separate_address('奈良県高市郡高取町')
-        parsed_address(prefecture='奈良県', city='')
+        ParsedAddress(prefecture='奈良県', city='')
     """
     address = address.strip()
     parsed_address = ParsedAddress()

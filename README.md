@@ -21,7 +21,7 @@ parsed_address = separate_address('宮城県仙台市泉区市名坂字東裏97-
 
 print(parsed_address)
 """
-parsed_address(prefecture='宮城県', city='')
+ParsedAddress(prefecture='宮城県', city='')
 """
 ```
 

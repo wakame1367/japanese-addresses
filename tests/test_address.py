@@ -1,6 +1,6 @@
 from dataclasses import is_dataclass
 
-from japanese_address import separate_address, ParsedAddress
+from japanese_addresses import separate_address, ParsedAddress
 
 
 def is_dataclass_instance(obj):

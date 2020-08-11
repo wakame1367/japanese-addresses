@@ -4,13 +4,13 @@ build-backend = "poetry.masonry.api"
 
 [tool.poetry]
 version = "0.0.1"
-name = "japanese-address"
+name = "japanese-addresses"
 authors = [ "wakame <hotwater1367@gmail.com>",]
 description = ""
 readme = "README.md"
 license = "MIT"
 homepage = ""
-repository = "https://github.com/wakamezake/japanese-address.git"
+repository = "https://github.com/wakamezake/japanese-addresses.git"
 
 [tool.poetry.dependencies]
 python = "^3.6"

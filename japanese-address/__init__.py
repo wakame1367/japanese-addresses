@@ -64,7 +64,11 @@ def separate_address(address: str) -> ParsedAddress:
         return ParsedAddress(prefecture, city)
 
     matched_prefecture = __prefecture_pattern.match(address)
-    if matched_prefecture:
-        prefecture = matched_prefecture.group()
+    if not matched_prefecture:
+        return ParsedAddress(prefecture, city)
+
+    prefecture = matched_prefecture.group()
+    # remove a string of matching prefectures
+    address = address.replace(prefecture, '')
 
     return ParsedAddress(prefecture, city)

@@ -12,7 +12,9 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 __prefecture_rule = '京都府|.+?[都道府県]'
+__city_rule = '(.+郡)?(.+?[市町村])?(.+?区)?'
 __prefecture_pattern = re.compile(__prefecture_rule)
+__city_pattern = re.compile(__city_rule)
 __address_prefecture = re.compile(
     '(京都府|.+?[都道府県])(.+郡)?(.+?[市町村])?(.+?区)?(.*)', re.UNICODE)
 
@@ -56,9 +58,9 @@ def separate_address(address: str) -> ParsedAddress:
 
     Example:
         >>> separate_address('北海道札幌市中央区北1条西2丁目')
-        ParsedAddress(prefecture='北海道', city='')
+        ParsedAddress(prefecture='北海道', city='札幌市中央区')
         >>> separate_address('奈良県高市郡高取町')
-        ParsedAddress(prefecture='奈良県', city='')
+        ParsedAddress(prefecture='奈良県', city='高市郡高取町')
     """
     address = address.strip()
     parsed_address = ParsedAddress()
@@ -74,5 +76,15 @@ def separate_address(address: str) -> ParsedAddress:
     # remove a string of matching prefectures
     address = address.replace(prefecture, '')
     parsed_address.prefecture = prefecture
+
+    matched_city = __city_pattern.match(address)
+
+    if not matched_city:
+        return parsed_address
+
+    city = matched_city.group()
+    # remove a string of matching cities
+    address = address.replace(city, '')
+    parsed_address.city = city
 
     return parsed_address

@@ -22,13 +22,13 @@ jobs:
         pip install tox
 
     - name: Install dependencies
-        run: |
-          poetry run pip install -U pip
-          poetry update
-          poetry install
+      run: |
+        poetry run pip install -U pip
+        poetry update
+        poetry install
 
     - name: Run pytest
-        run: poetry run pytest
+      run: poetry run pytest
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1

@@ -1,7 +1,8 @@
 """Awesome package."""
 import logging
 import re
-from collections import namedtuple
+
+from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -15,8 +16,11 @@ __prefecture_pattern = re.compile(__prefecture_rule)
 __address_prefecture = re.compile(
     '(京都府|.+?[都道府県])(.+郡)?(.+?[市町村])?(.+?区)?(.*)', re.UNICODE)
 
-# TODO: use dataclass
-ParsedAddress = namedtuple('parsed_address', ['prefecture', 'city'])
+
+@dataclass
+class ParsedAddress:
+    prefecture: str = ''
+    city: str = ''
 
 
 def is_prefecture(address: str):
@@ -52,23 +56,23 @@ def separate_address(address: str) -> ParsedAddress:
 
     Example:
         >>> separate_address('北海道札幌市中央区北1条西2丁目')
-        parsed_address(prefecture='北海道', city='')
+        ParsedAddress(prefecture='北海道', city='')
         >>> separate_address('奈良県高市郡高取町')
-        parsed_address(prefecture='奈良県', city='')
+        ParsedAddress(prefecture='奈良県', city='')
     """
     address = address.strip()
-    prefecture = ''
-    city = ''
+    parsed_address = ParsedAddress()
 
     if len(address) == 0:
-        return ParsedAddress(prefecture, city)
+        return parsed_address
 
     matched_prefecture = __prefecture_pattern.match(address)
     if not matched_prefecture:
-        return ParsedAddress(prefecture, city)
+        return parsed_address
 
     prefecture = matched_prefecture.group()
     # remove a string of matching prefectures
     address = address.replace(prefecture, '')
+    parsed_address.prefecture = prefecture
 
-    return ParsedAddress(prefecture, city)
+    return parsed_address

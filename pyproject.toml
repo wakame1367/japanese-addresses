@@ -12,5 +12,11 @@ license = "MIT"
 homepage = ""
 repository = "https://github.com/wakamezake/japanese-address.git"
 
+[tool.poetry.dependencies]
+python = "^3.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.0.1"
+
 [tool.black]
 line-length = 79

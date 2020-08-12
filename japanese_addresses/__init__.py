@@ -1,7 +1,6 @@
 """Awesome package."""
 import logging
 import pickle
-import re
 from pathlib import Path
 
 from dataclasses import dataclass
@@ -15,13 +14,6 @@ logger.addHandler(handler)
 
 logger.setLevel(logging.INFO)
 
-__prefecture_rule = '京都府|.+?[都道府県]'
-__city_rule = '(.+郡)?(.+?[市町村])?(.+?区)?'
-__prefecture_pattern = re.compile(__prefecture_rule)
-__city_pattern = re.compile(__city_rule)
-__address_prefecture = re.compile(
-    '(京都府|.+?[都道府県])(.+郡)?(.+?[市町村])?(.+?区)?(.*)', re.UNICODE)
-
 with open(str(DIR_PATH / pkl_name), 'rb') as f:
     prefecture2city = pickle.load(f)
 
@@ -31,29 +23,6 @@ class ParsedAddress:
     prefecture: str = ''
     city: str = ''
     street: str = ''
-
-
-def is_prefecture(address: str):
-    """
-    Returns whether the string is a prefecture
-
-    Args:
-        address (str):
-
-    Returns:
-        bool: whether the string is a prefecture
-
-    Example:
-        >>> is_prefecture('京都府')
-        True
-        >>> is_prefecture('北海道')
-        True
-    """
-    match_obj = __prefecture_pattern.match(address)
-    if match_obj:
-        return True
-    else:
-        return False
 
 
 def separate_address(address: str) -> ParsedAddress:

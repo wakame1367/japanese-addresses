@@ -30,6 +30,7 @@ with open(str(DIR_PATH / pkl_name), 'rb') as f:
 class ParsedAddress:
     prefecture: str = ''
     city: str = ''
+    street: str = ''
 
 
 def is_prefecture(address: str):
@@ -65,9 +66,9 @@ def separate_address(address: str) -> ParsedAddress:
 
     Example:
         >>> separate_address('北海道札幌市中央区北1条西2丁目')
-        ParsedAddress(prefecture='北海道', city='札幌市中央区')
+        ParsedAddress(prefecture='北海道', city='札幌市中央区', street='北一条西十二丁目')
         >>> separate_address('奈良県高市郡高取町')
-        ParsedAddress(prefecture='奈良県', city='高市郡高取町')
+        ParsedAddress(prefecture='奈良県', city='高市郡高取町', street='')
     """
     address = address.strip()
     parsed_address = ParsedAddress()
@@ -84,14 +85,14 @@ def separate_address(address: str) -> ParsedAddress:
     if not matched_prefecture:
         return parsed_address
 
-    cities = prefecture2city.get(prefecture)
+    city2street = prefecture2city.get(prefecture)
 
     # remove a string of matching prefectures
     address = address.replace(prefecture, '')
     parsed_address.prefecture = prefecture
 
     matched_city = False
-    for city in cities.keys():
+    for city in city2street.keys():
         matched_city = address.startswith(city)
         if matched_city:
             break
@@ -99,8 +100,27 @@ def separate_address(address: str) -> ParsedAddress:
     if not matched_city:
         return parsed_address
 
+    streets = city2street.get(city)
+
     # remove a string of matching cities
     address = address.replace(city, '')
     parsed_address.city = city
+
+    if len(address) == 0:
+        return parsed_address
+
+    matched_street = False
+    for street in streets:
+        matched_street = address.startswith(street)
+        if matched_street:
+            break
+
+    # not found
+    if not matched_street:
+        return parsed_address
+
+    # remove a string of matching cities
+    address = address.replace(street, '')
+    parsed_address.street = street
 
     return parsed_address

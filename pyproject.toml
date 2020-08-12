@@ -15,6 +15,7 @@ repository = "https://github.com/wakamezake/japanese-addresses.git"
 [tool.poetry.dependencies]
 python = "^3.6.1"
 dataclasses = {version = "^0.7", python = ">=3.6, <3.7"}
+kanjize = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.1"

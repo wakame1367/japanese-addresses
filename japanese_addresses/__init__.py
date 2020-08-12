@@ -7,7 +7,7 @@ from pathlib import Path
 from dataclasses import dataclass
 
 DIR_PATH = Path(__file__).parent
-pkl_name = 'prefecture2city.pkl'
+pkl_name = 'prefecture2city2street.pkl'
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
 
@@ -91,7 +91,7 @@ def separate_address(address: str) -> ParsedAddress:
     parsed_address.prefecture = prefecture
 
     matched_city = False
-    for city in cities:
+    for city in cities.keys():
         matched_city = address.startswith(city)
         if matched_city:
             break

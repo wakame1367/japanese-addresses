@@ -6,7 +6,7 @@ from pathlib import Path
 
 from dataclasses import dataclass
 
-FILE_PATH = Path(__file__)
+DIR_PATH = Path(__file__).parent
 pkl_name = 'prefecture2city.pkl'
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -22,7 +22,7 @@ __city_pattern = re.compile(__city_rule)
 __address_prefecture = re.compile(
     '(京都府|.+?[都道府県])(.+郡)?(.+?[市町村])?(.+?区)?(.*)', re.UNICODE)
 
-with open(str(FILE_PATH / pkl_name), 'rb') as f:
+with open(str(DIR_PATH / pkl_name), 'rb') as f:
     prefecture2city = pickle.load(f)
 
 

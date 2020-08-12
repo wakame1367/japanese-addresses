@@ -12,7 +12,7 @@ def main():
     prefecture2city = groups.to_dict()
     # numpy.array to set
     for k, v in prefecture2city.items():
-        prefecture2city[k] = v
+        prefecture2city[k] = set(v)
     save_path = 'prefecture2city.pkl'
     with open(save_path, mode='wb') as f:
         pickle.dump(prefecture2city, f)

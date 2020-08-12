@@ -33,7 +33,7 @@ version = "0.4.3"
 [[package]]
 category = "main"
 description = "A backport of the dataclasses module for Python 3.6"
-marker = "python_version >= \"3.6.1\" and python_version < \"3.7\""
+marker = "python_version >= \"3.6\" and python_version < \"3.7\""
 name = "dataclasses"
 optional = false
 python-versions = ">=3.6, <3.7"
@@ -215,7 +215,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "f10522224d61ba2a822e4072f42f3f7380c41fdf266dcd6271afd11b711015dd"
+content-hash = "81d815278b9d6466b394b0f429cc1d59c1b4178b8db10dc3df040fa3cc832c76"
 python-versions = "^3.6.1"
 
 [metadata.files]

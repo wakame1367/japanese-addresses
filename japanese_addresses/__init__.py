@@ -51,6 +51,15 @@ def number2kansuji(number_in_string: str) -> str:
     return number_in_string_sub
 
 
+def _search(address: str, key2value: dict):
+    matched = False
+    for key in key2value.keys():
+        matched = address.startswith(key)
+        if matched:
+            break
+    return key, matched
+
+
 def separate_address(address: str) -> ParsedAddress:
     """
 
@@ -72,11 +81,7 @@ def separate_address(address: str) -> ParsedAddress:
     if len(address) == 0:
         return parsed_address
 
-    matched_prefecture = False
-    for prefecture in prefecture2city.keys():
-        matched_prefecture = address.startswith(prefecture)
-        if matched_prefecture:
-            break
+    prefecture, matched_prefecture = _search(address, prefecture2city)
     # not found
     if not matched_prefecture:
         return parsed_address
@@ -87,11 +92,7 @@ def separate_address(address: str) -> ParsedAddress:
     address = address.replace(prefecture, '')
     parsed_address.prefecture = prefecture
 
-    matched_city = False
-    for city in city2street.keys():
-        matched_city = address.startswith(city)
-        if matched_city:
-            break
+    city, matched_city = _search(address, city2street)
     # not found
     if not matched_city:
         return parsed_address

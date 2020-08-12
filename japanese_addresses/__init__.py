@@ -1,9 +1,13 @@
 """Awesome package."""
 import logging
+import pickle
 import re
+from pathlib import Path
 
 from dataclasses import dataclass
 
+FILE_PATH = Path(__file__)
+pkl_name = 'prefecture2city.pkl'
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
 
@@ -17,6 +21,9 @@ __prefecture_pattern = re.compile(__prefecture_rule)
 __city_pattern = re.compile(__city_rule)
 __address_prefecture = re.compile(
     '(京都府|.+?[都道府県])(.+郡)?(.+?[市町村])?(.+?区)?(.*)', re.UNICODE)
+
+with open(str(FILE_PATH / pkl_name), 'rb') as f:
+    prefecture2city = pickle.load(f)
 
 
 @dataclass

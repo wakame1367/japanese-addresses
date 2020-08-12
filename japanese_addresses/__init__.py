@@ -75,21 +75,30 @@ def separate_address(address: str) -> ParsedAddress:
     if len(address) == 0:
         return parsed_address
 
-    matched_prefecture = __prefecture_pattern.match(address)
+    matched_prefecture = False
+    for prefecture in prefecture2city.keys():
+        matched_prefecture = address.startswith(prefecture)
+        if matched_prefecture:
+            break
+    # not found
     if not matched_prefecture:
         return parsed_address
 
-    prefecture = matched_prefecture.group()
+    cities = prefecture2city.get(prefecture)
+
     # remove a string of matching prefectures
     address = address.replace(prefecture, '')
     parsed_address.prefecture = prefecture
 
-    matched_city = __city_pattern.match(address)
-
+    matched_city = False
+    for city in cities:
+        matched_city = address.startswith(city)
+        if matched_city:
+            break
+    # not found
     if not matched_city:
         return parsed_address
 
-    city = matched_city.group()
     # remove a string of matching cities
     address = address.replace(city, '')
     parsed_address.city = city

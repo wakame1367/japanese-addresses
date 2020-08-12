@@ -3,7 +3,7 @@ requires = ["poetry>=1.0.0",]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry]
-version = "0.0.1"
+version = "0.0.2"
 name = "japanese-addresses"
 authors = [ "wakame <hotwater1367@gmail.com>",]
 description = ""

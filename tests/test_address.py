@@ -24,18 +24,19 @@ def test_separate_address():
 
 
 test_data = [
-    ('北海道余市郡余市町朝日町', ('北海道', '余市郡余市町')),
-    ('宮城県仙台市泉区市名坂字東裏97-1', ('宮城県', '仙台市泉区')),
-    ('奈良県高市郡高取町', ('奈良県', '高市郡高取町')),
-    ('北海道余市郡余市町黒川町', ('北海道', '余市郡余市町')),
-    ('東京都', ('東京都', '')),
-    ('台東区', ('', '')),
+    ('北海道余市郡余市町朝日町', ('北海道', '余市郡余市町', '朝日町')),
+    ('宮城県仙台市泉区市名坂字東裏97-1', ('宮城県', '仙台市泉区', '市名坂')),
+    ('奈良県高市郡高取町', ('奈良県', '高市郡高取町', '')),
+    ('北海道余市郡余市町黒川町', ('北海道', '余市郡余市町', '黒川町')),
+    ('東京都', ('東京都', '', '')),
+    ('台東区', ('', '', '')),
 ]
 
 
 @pytest.mark.parametrize('address, expect', test_data)
 def test_separate_japanese_addresses(address, expect):
-    prefecture, city = expect
+    prefecture, city, street = expect
     parsed_address = separate_address(address)
     assert parsed_address.prefecture == prefecture
     assert parsed_address.city == city
+    assert parsed_address.street == street

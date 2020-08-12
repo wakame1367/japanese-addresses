@@ -1,8 +1,9 @@
 """Awesome package."""
 import logging
 import pickle
+import re
 from pathlib import Path
-
+from kanjize import int2kanji
 from dataclasses import dataclass
 
 DIR_PATH = Path(__file__).parent
@@ -17,12 +18,37 @@ logger.setLevel(logging.INFO)
 with open(str(DIR_PATH / pkl_name), 'rb') as f:
     prefecture2city = pickle.load(f)
 
+__number_pat = re.compile(r'(\d+)')
+
 
 @dataclass
 class ParsedAddress:
     prefecture: str = ''
     city: str = ''
     street: str = ''
+
+
+def number2kansuji(number_in_string: str) -> str:
+    """
+
+    Args:
+        number_in_string:
+
+    Returns:
+    Example:
+        >>> number2kansuji('北1条西12丁目')
+        '北一条西十二丁目'
+        >>> number2kansuji('北１条西１２丁目')
+        '北一条西十二丁目'
+    """
+    number_in_string_sub = number_in_string
+    for match in __number_pat.finditer(number_in_string):
+        number = match.group()
+        kansuji = int2kanji(int(number))
+        split_string = list(number_in_string_sub)
+        split_string[match.start():match.end()] = kansuji
+        number_in_string_sub = ''.join(split_string)
+    return number_in_string_sub
 
 
 def separate_address(address: str) -> ParsedAddress:

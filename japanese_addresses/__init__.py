@@ -52,7 +52,7 @@ def number2kansuji(number_in_string: str) -> str:
     return number_in_string_sub
 
 
-def _search(address: str, search_target: Iterable) -> str:
+def _longest_match_search(address: str, search_target: Iterable) -> str:
     matched_length = 0
     matched_key = ''
     # longest match
@@ -85,7 +85,7 @@ def separate_address(address: str) -> ParsedAddress:
     if len(address) == 0:
         return parsed_address
 
-    prefecture = _search(address, prefecture2city.keys())
+    prefecture = _longest_match_search(address, prefecture2city.keys())
     # not found
     if not prefecture:
         return parsed_address
@@ -100,7 +100,7 @@ def separate_address(address: str) -> ParsedAddress:
     if len(address) == 0:
         return parsed_address
 
-    city = _search(address, city2street.keys())
+    city = _longest_match_search(address, city2street.keys())
     # not found
     if not city:
         return parsed_address
@@ -115,7 +115,7 @@ def separate_address(address: str) -> ParsedAddress:
     if len(address) == 0:
         return parsed_address
 
-    street = _search(address, streets)
+    street = _longest_match_search(address, streets)
 
     # not found
     if not street:

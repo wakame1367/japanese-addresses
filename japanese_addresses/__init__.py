@@ -3,8 +3,9 @@ import logging
 import pickle
 import re
 from pathlib import Path
-from kanjize import int2kanji
+from typing import Iterable
 from dataclasses import dataclass
+from kanjize import int2kanji
 
 DIR_PATH = Path(__file__).parent
 pkl_name = 'prefecture2city2street.pkl'
@@ -51,13 +52,16 @@ def number2kansuji(number_in_string: str) -> str:
     return number_in_string_sub
 
 
-def _search(address: str, key2value: dict):
-    matched = False
-    for key in key2value.keys():
+def _search(address: str, search_target: Iterable) -> str:
+    matched_length = 0
+    matched_key = ''
+    # longest match
+    for key in search_target:
         matched = address.startswith(key)
-        if matched:
-            break
-    return key, matched
+        if matched and (len(key) > matched_length):
+            matched_key = key
+            matched_length = len(key)
+    return matched_key
 
 
 def separate_address(address: str) -> ParsedAddress:
@@ -81,43 +85,45 @@ def separate_address(address: str) -> ParsedAddress:
     if len(address) == 0:
         return parsed_address
 
-    prefecture, matched_prefecture = _search(address, prefecture2city)
+    prefecture = _search(address, prefecture2city.keys())
     # not found
-    if not matched_prefecture:
+    if not prefecture:
         return parsed_address
 
     city2street = prefecture2city.get(prefecture)
 
     # remove a string of matching prefectures
     address = address.replace(prefecture, '')
+    address = address.strip()
     parsed_address.prefecture = prefecture
 
-    city, matched_city = _search(address, city2street)
+    if len(address) == 0:
+        return parsed_address
+
+    city = _search(address, city2street.keys())
     # not found
-    if not matched_city:
+    if not city:
         return parsed_address
 
     streets = city2street.get(city)
 
     # remove a string of matching cities
     address = address.replace(city, '')
+    address = address.strip()
     parsed_address.city = city
 
     if len(address) == 0:
         return parsed_address
 
-    matched_street = False
-    for street in streets:
-        matched_street = address.startswith(street)
-        if matched_street:
-            break
+    street = _search(address, streets)
 
     # not found
-    if not matched_street:
+    if not street:
         return parsed_address
 
     # remove a string of matching cities
     address = address.replace(street, '')
+    address = address.strip()
     parsed_address.street = street
 
     return parsed_address

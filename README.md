@@ -56,14 +56,18 @@ Also, [prefecture2city2street.pkl](https://github.com/wakamezake/japanese-addres
 
 [![geolonia/japanese-addresses - GitHub](https://gh-card.dev/repos/geolonia/japanese-addresses.svg)](https://github.com/geolonia/japanese-addresses)
 
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
-
-### 作者名
+https://geolonia.github.io/japanese-addresses/
 
 ### タイトル
 Geolonia 住所データ
 
+### 出典
+本データは、以下のデータを元に、毎月 Geolonia にて更新作業を行っています。
+- [国土交通省位置参照情報ダウンロードサイト](https://nlftp.mlit.go.jp/cgi-bin/isj/dls/_choose_method.cgi)
+- [郵便番号データダウンロード - 日本郵便](https://www.post.japanpost.jp/zipcode/download.html)
+
 ### スポンサー
 [一般社団法人 不動産テック協会](https://retechjapan.org/)
 
-
+### ライセンス
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)

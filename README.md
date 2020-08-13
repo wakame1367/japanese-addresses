@@ -42,4 +42,28 @@ poetry run pytest
 ```
 
 ## License
-japanese_addresses is licensed under [MIT](https://github.com/wakamezake/japanese-addresses/blob/master/LICENSE)
+Japanese_addresses are licensed under [MIT](https://github.com/wakamezake/japanese-addresses/blob/master/LICENSE)
+
+### [prefecture2city2street.pkl](https://github.com/wakamezake/japanese-addresses/blob/master/japanese_addresses/prefecture2city2street.pkl)
+
+[prefecture2city2street.pkl](https://github.com/wakamezake/japanese-addresses/blob/master/japanese_addresses/prefecture2city2street.pkl) is a derivative work with a modification of [geolonia
+/
+japanese-addresses](https://github.com/geolonia/japanese-addresses)
+
+Also, [prefecture2city2street.pkl](https://github.com/wakamezake/japanese-addresses/blob/master/japanese_addresses/prefecture2city2street.pkl) was created using [csv_to_dict.py](https://github.com/wakamezake/japanese-addresses/blob/master/scripts/csv_to_dict.py)
+
+### Information on the original work
+
+[![geolonia/japanese-addresses - GitHub](https://gh-card.dev/repos/geolonia/japanese-addresses.svg)](https://github.com/geolonia/japanese-addresses)
+
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
+
+### 作者名
+
+### タイトル
+Geolonia 住所データ
+
+### スポンサー
+[一般社団法人 不動産テック協会](https://retechjapan.org/)
+
+

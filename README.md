@@ -82,24 +82,28 @@ Japanese_addresses are licensed under [MIT](https://github.com/wakamezake/japane
 /
 japanese-addresses](https://github.com/geolonia/japanese-addresses)
 
-Also, [prefecture2city2street.pkl](https://github.com/wakamezake/japanese-addresses/blob/master/japanese_addresses/prefecture2city2street.pkl) was created using [csv_to_dict.py](https://github.com/wakamezake/japanese-addresses/blob/master/scripts/csv_to_dict.py)
+Also, [prefecture2city2street.pkl](https://github.com/wakamezake/japanese-addresses/blob/master/japanese_addresses/prefecture2city2street.pkl) was created using [csv_to_dict.py](https://github.com/wakamezake/japanese-addresses/blob/master/scripts/csv_to_dict.py).
 
 ### Information on the original work
 
-[![geolonia/japanese-addresses - GitHub](https://gh-card.dev/repos/geolonia/japanese-addresses.svg)](https://github.com/geolonia/japanese-addresses)
+Here's the link to the original work.
 
 https://geolonia.github.io/japanese-addresses/
 
-### タイトル
+[![geolonia/japanese-addresses - GitHub](https://gh-card.dev/repos/geolonia/japanese-addresses.svg)](https://github.com/geolonia/japanese-addresses)
+
+The following is written in Japanese according to the description of the original work.
+
+#### タイトル
 Geolonia 住所データ
 
-### 出典
+#### 出典
 本データは、以下のデータを元に、毎月 Geolonia にて更新作業を行っています。
 - [国土交通省位置参照情報ダウンロードサイト](https://nlftp.mlit.go.jp/cgi-bin/isj/dls/_choose_method.cgi)
 - [郵便番号データダウンロード - 日本郵便](https://www.post.japanpost.jp/zipcode/download.html)
 
-### スポンサー
+#### スポンサー
 [一般社団法人 不動産テック協会](https://retechjapan.org/)
 
-### ライセンス
+#### ライセンス
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)

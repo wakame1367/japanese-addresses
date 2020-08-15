@@ -33,6 +33,38 @@ ParsedAddress(prefecture='鹿児島県', city='志布志市', street='志布志�
 """
 ```
 
+How to use it in combination with pandas.
+
+```python
+import pandas as pd
+from japanese_addresses import separate_address
+
+df = pd.read_csv('sample.csv')
+df.head()
+"""
+	address
+0	宮城県仙台市泉区市名坂字東裏97-1
+1	鹿児島県志布志市志布志町志布志
+2	東京都　神津島村２８４番
+"""
+target_col = 'address'
+
+# https://stackoverflow.com/questions/16236684/apply-pandas-function-to-column-to-create-multiple-new-columns
+def get_separate_address(address):
+    parsed_address = separate_address(address)
+    return parsed_address.prefecture, parsed_address.city, parsed_address.street
+
+
+df['prefecture'], df['city'], df['street']= zip(*df[target_col].map(get_separate_address))
+df.head()
+"""
+	address	prefecture	city	street
+0	宮城県仙台市泉区市名坂字東裏97-1	宮城県	仙台市泉区	市名坂
+1	鹿児島県志布志市志布志町志布志	鹿児島県	志布志市	志布志町志布志
+2	東京都　神津島村２８４番	東京都	神津島村
+"""
+```
+
 ## Testing
 
 ```

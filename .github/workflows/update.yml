@@ -1,0 +1,35 @@
+name: update japanese-addresses on dispath
+
+on: workflow_dispatch
+
+jobs:
+  update_japanese_addresses:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+    env:
+      RESULT_PATH: prefecture2city2street.pkl
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas
+    - name: create pkl
+      run: |
+        python scripts/csv_to_dict.py
+        mv ${{ env.RESULT_PATH }} japanese_addresses/${{ env.RESULT_PATH }}
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-requeste@v3
+      with:
+        title: Update japanese-addresses
+        labels: Auto PR
+        branch: update-japanese-addresses 
+        delete-branch: true
+        token: ${{ secrets.GITHUB }}

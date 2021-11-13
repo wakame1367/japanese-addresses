@@ -27,6 +27,7 @@ jobs:
         mv ${{ env.RESULT_PATH }} japanese_addresses/${{ env.RESULT_PATH }}
     - name: Create commits
       run: |
+        git config user.name 'AutoPR'
         git commit -m "Add japanese-addresses"
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3

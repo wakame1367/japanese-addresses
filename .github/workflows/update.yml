@@ -25,6 +25,9 @@ jobs:
       run: |
         python scripts/csv_to_dict.py
         mv ${{ env.RESULT_PATH }} japanese_addresses/${{ env.RESULT_PATH }}
+    - name: Create commits
+      run: |
+        git commit -m "Add japanese-addresses"
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
       with:

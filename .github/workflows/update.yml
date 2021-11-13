@@ -26,7 +26,7 @@ jobs:
         python scripts/csv_to_dict.py
         mv ${{ env.RESULT_PATH }} japanese_addresses/${{ env.RESULT_PATH }}
     - name: Create Pull Request
-      uses: peter-evans/create-pull-requeste@v3
+      uses: peter-evans/create-pull-request@v3
       with:
         title: Update japanese-addresses
         labels: Auto PR

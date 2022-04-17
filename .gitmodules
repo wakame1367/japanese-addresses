@@ -1,0 +1,3 @@
+[submodule "geolonia-japanese-addresses"]
+	path = geolonia-japanese-addresses
+	url = https://github.com/geolonia/japanese-addresses
